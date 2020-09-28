@@ -88,6 +88,14 @@ struct ContentView: View {
                         self.numbers[i] = Int.random(in: 0...self.symbols.count - 1)
                     }
                     // Check earnings
+                    // Check if all elements are equal
+                    if self.numbers[0] == self.numbers[1] && self.numbers[1] == self.numbers[2] {
+                        self.credits += self.betAmount * 10
+                    } else {
+                        self.credits -= self.betAmount
+                    }
+                    
+                    // TODO: BETTER WAY
                     
                 }) {
                     Text("Spin")
