@@ -12,10 +12,12 @@ struct ContentView: View {
     public var primaryColor = Color(red: 38/255, green: 190/255, blue: 255/255)
     public var secondaryColor = Color(red: 38/255, green: 255/255, blue: 186/255)
     
-    
+    private var symbols = ["apple", "star", "cherry"]
     
     // Stats let us automatically update the UI
+    @State private var numbers = [0, 0, 0]
     @State private var credits = 1000
+    private var betAmount = 5
     
     
     var body: some View {
@@ -59,17 +61,17 @@ struct ContentView: View {
                 // Cards
                 HStack {
                     Spacer()
-                    Image("star")
+                    Image(symbols[numbers[0]])
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(20)
-                    Image("star")
+                    Image(symbols[numbers[1]])
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(20)
-                    Image("star")
+                    Image(symbols[numbers[2]])
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
                         .background(Color.white.opacity(0.5))
@@ -81,7 +83,12 @@ struct ContentView: View {
                 
                 // Button
                 Button(action: {
-                    self.credits += 1
+                    // Change the images
+                    for i in 0...self.symbols.count - 1 {
+                        self.numbers[i] = Int.random(in: 0...self.symbols.count - 1)
+                    }
+                    // Check earnings
+                    
                 }) {
                     Text("Spin")
                         .foregroundColor(.white)
