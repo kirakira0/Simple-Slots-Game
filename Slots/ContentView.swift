@@ -19,6 +19,15 @@ struct ContentView: View {
     @State private var credits = 1000
     private var betAmount = 5
     
+    func getCardEquivalence(numbers: [Int]) -> Bool {
+        for i in 1...numbers.count - 1 {
+            if numbers[0] != numbers[i] {
+                return false
+            }
+        }
+        return true
+    }
+    
     
     var body: some View {
         // ZStacks overlay children and align them in both axes.
@@ -89,14 +98,11 @@ struct ContentView: View {
                     }
                     // Check earnings
                     // Check if all elements are equal
-                    if self.numbers[0] == self.numbers[1] && self.numbers[1] == self.numbers[2] {
+                    if getCardEquivalence(numbers: self.numbers) {
                         self.credits += self.betAmount * 10
                     } else {
                         self.credits -= self.betAmount
-                    }
-                    
-                    // TODO: BETTER WAY
-                    
+                    }   
                 }) {
                     Text("Spin")
                         .foregroundColor(.white)
